@@ -4,10 +4,16 @@
 #include <stdlib.h>
 extern char *tzname[];
  
-main()
+int main()
 {
     time_t now;
     struct tm *sp;
+
+    if (putenv("TZ=PST8PDT") != 0) {
+        perror("putenv");
+        exit(1);
+    }
+    tzset();
 
     (void) time( &now );
 
